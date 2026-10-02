@@ -45,7 +45,7 @@ function Welcome({ onFinish }: { onFinish: () => void }) {
         inset: 0,
         width: "100%",
         height: "100%",
-        background: "#F5F7FA",
+        background: "#FCFBF9",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -131,30 +131,52 @@ function DashboardApp() {
         }
       >
         <Route path="/" element={<Dashboard />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route
+          path="/dashboard"
+          element={<Dashboard />}
+        />
+
         <Route
           path="/recommended-price"
           element={<RecommendedPrice />}
         />
-        <Route path="/costs" element={<Costs />} />
-        <Route path="/device" element={<Device />} />
-        <Route path="/sales" element={<Sales />} />
+
+        <Route
+          path="/costs"
+          element={<Costs />}
+        />
+
+        <Route
+          path="/device"
+          element={<Device />}
+        />
+
+        <Route
+          path="/sales"
+          element={<Sales />}
+        />
+
         <Route
           path="/sales-volume"
           element={<SalesVolume />}
         />
+
         <Route
           path="/target-profit"
           element={<TargetProfit />}
         />
+
         <Route
           path="/scenarios"
           element={<Scenarios />}
         />
+
         <Route
           path="/reports"
           element={<Reports />}
         />
+
         <Route
           path="/print-report"
           element={<PrintReport />}
