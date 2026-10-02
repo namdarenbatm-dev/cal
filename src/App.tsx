@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HashRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { AppLayout } from "./components/layout/AppLayout";
 import {
   FinancialModelProvider,
@@ -45,7 +45,7 @@ function Welcome({ onFinish }: { onFinish: () => void }) {
         inset: 0,
         width: "100%",
         height: "100%",
-        background: "#ffffff",
+        background: "#F5F7FA",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -64,32 +64,33 @@ function Welcome({ onFinish }: { onFinish: () => void }) {
       >
         <img
           src={ICON_PATH}
-          alt="EDGE Pos"
+          alt="EDGE POS"
           style={{
-            width: 130,
-            height: 130,
+            width: 140,
+            height: 140,
             objectFit: "contain",
             display: "block",
-            margin: "0 auto 24px",
+            margin: "0 auto 28px",
           }}
         />
 
         <div
           style={{
-            fontSize: 42,
+            fontSize: 40,
             fontWeight: 700,
-            letterSpacing: "8px",
+            letterSpacing: "6px",
             color: "#111827",
             marginBottom: 14,
           }}
         >
-          EDGE
+          EDGE POS
         </div>
 
         <div
           style={{
             fontSize: 14,
-            color: "#6b7280",
+            fontWeight: 400,
+            color: "#6B7280",
             letterSpacing: "1px",
           }}
         >
