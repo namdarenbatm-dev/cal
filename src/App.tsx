@@ -1,8 +1,10 @@
-
 import React, { useEffect, useState } from "react";
 import { HashRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { AppLayout } from "./components/layout/AppLayout";
-import { FinancialModelProvider, useFinancialModel } from "./hooks/FinancialModelContext";
+import {
+  FinancialModelProvider,
+  useFinancialModel,
+} from "./hooks/FinancialModelContext";
 import Dashboard from "./pages/Dashboard";
 import RecommendedPrice from "./pages/RecommendedPrice";
 import Costs from "./pages/Costs";
@@ -14,7 +16,8 @@ import Scenarios from "./pages/Scenarios";
 import Reports from "./pages/Reports";
 import PrintReport from "./pages/PrintReport";
 
-const ICON_PATH = "/icon/9B6D5AD1-3C84-462E-A99A-D47720E99165.png";
+const ICON_PATH =
+  "/icon/9B6D5AD1-3C84-462E-A99A-D47720E99165.png";
 
 function Welcome() {
   const navigate = useNavigate();
@@ -103,7 +106,10 @@ function Shell() {
         }
       >
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/recommended-price" element={<RecommendedPrice />} />
+        <Route
+          path="/recommended-price"
+          element={<RecommendedPrice />}
+        />
         <Route path="/costs" element={<Costs />} />
         <Route path="/device" element={<Device />} />
         <Route path="/sales" element={<Sales />} />
@@ -126,4 +132,3 @@ export default function App() {
     </FinancialModelProvider>
   );
 }
-```
