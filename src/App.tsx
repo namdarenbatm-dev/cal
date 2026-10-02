@@ -16,6 +16,7 @@ import TargetProfit from "./pages/TargetProfit";
 import Scenarios from "./pages/Scenarios";
 import Reports from "./pages/Reports";
 import PrintReport from "./pages/PrintReport";
+import UserGuide from "./pages/UserGuide";
 
 const ICON_PATH =
   "/icon/9B6D5AD1-3C84-462E-A99A-D47720E99165.png";
@@ -133,55 +134,38 @@ function DashboardApp() {
         }
       >
         <Route path="/" element={<Dashboard />} />
-
-        <Route
-          path="/dashboard"
-          element={<Dashboard />}
-        />
-
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route
           path="/recommended-price"
           element={<RecommendedPrice />}
         />
-
-        <Route
-          path="/costs"
-          element={<Costs />}
-        />
-
-        <Route
-          path="/device"
-          element={<Device />}
-        />
-
-        <Route
-          path="/sales"
-          element={<Sales />}
-        />
-
+        <Route path="/costs" element={<Costs />} />
+        <Route path="/device" element={<Device />} />
+        <Route path="/sales" element={<Sales />} />
         <Route
           path="/sales-volume"
           element={<SalesVolume />}
         />
-
         <Route
           path="/target-profit"
           element={<TargetProfit />}
         />
-
         <Route
           path="/scenarios"
           element={<Scenarios />}
         />
-
         <Route
           path="/reports"
           element={<Reports />}
         />
-
         <Route
           path="/print-report"
           element={<PrintReport />}
+        />
+
+        <Route
+          path="/user-guide"
+          element={<UserGuide />}
         />
       </Route>
     </Routes>
