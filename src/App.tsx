@@ -5,6 +5,7 @@ import {
   FinancialModelProvider,
   useFinancialModel,
 } from "./hooks/FinancialModelContext";
+
 import Dashboard from "./pages/Dashboard";
 import RecommendedPrice from "./pages/RecommendedPrice";
 import Costs from "./pages/Costs";
@@ -19,29 +20,37 @@ import PrintReport from "./pages/PrintReport";
 const ICON_PATH =
   "/icon/9B6D5AD1-3C84-462E-A99A-D47720E99165.png";
 
-function Welcome() {
-  const navigate = useNavigate();
+function Welcome({ onFinish }: { onFinish: () => void }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    setVisible(true);
+    const showTimer = setTimeout(() => {
+      setVisible(true);
+    }, 50);
 
-    const timer = setTimeout(() => {
-      navigate("/dashboard", { replace: true });
+    const finishTimer = setTimeout(() => {
+      onFinish();
     }, 5000);
 
-    return () => clearTimeout(timer);
-  }, [navigate]);
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(finishTimer);
+    };
+  }, [onFinish]);
 
   return (
     <div
       style={{
-        minHeight: "100vh",
+        position: "fixed",
+        inset: 0,
+        width: "100%",
+        height: "100%",
         background: "#ffffff",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         direction: "ltr",
+        zIndex: 99999,
       }}
     >
       <div
@@ -49,12 +58,13 @@ function Welcome() {
           textAlign: "center",
           opacity: visible ? 1 : 0,
           transform: visible ? "scale(1)" : "scale(0.92)",
-          transition: "opacity 1s ease, transform 1s ease",
+          transition:
+            "opacity 1s ease-out, transform 1s ease-out",
         }}
       >
         <img
           src={ICON_PATH}
-          alt="EDGE"
+          alt="EDGE Pos"
           style={{
             width: 130,
             height: 130,
@@ -90,21 +100,36 @@ function Welcome() {
   );
 }
 
-function Shell() {
+function MainApp() {
+  const [showWelcome, setShowWelcome] = useState(true);
+
+  const finishWelcome = React.useCallback(() => {
+    setShowWelcome(false);
+  }, []);
+
+  if (showWelcome) {
+    return <Welcome onFinish={finishWelcome} />;
+  }
+
+  return <DashboardApp />;
+}
+
+function DashboardApp() {
   const { darkMode, setDarkMode } = useFinancialModel();
 
   return (
     <Routes>
-      <Route path="/" element={<Welcome />} />
-
       <Route
         element={
           <AppLayout
             darkMode={darkMode}
-            onToggleDark={() => setDarkMode((v) => !v)}
+            onToggleDark={() =>
+              setDarkMode((v) => !v)
+            }
           />
         }
       >
+        <Route path="/" element={<Dashboard />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route
           path="/recommended-price"
@@ -113,11 +138,26 @@ function Shell() {
         <Route path="/costs" element={<Costs />} />
         <Route path="/device" element={<Device />} />
         <Route path="/sales" element={<Sales />} />
-        <Route path="/sales-volume" element={<SalesVolume />} />
-        <Route path="/target-profit" element={<TargetProfit />} />
-        <Route path="/scenarios" element={<Scenarios />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/print-report" element={<PrintReport />} />
+        <Route
+          path="/sales-volume"
+          element={<SalesVolume />}
+        />
+        <Route
+          path="/target-profit"
+          element={<TargetProfit />}
+        />
+        <Route
+          path="/scenarios"
+          element={<Scenarios />}
+        />
+        <Route
+          path="/reports"
+          element={<Reports />}
+        />
+        <Route
+          path="/print-report"
+          element={<PrintReport />}
+        />
       </Route>
     </Routes>
   );
@@ -127,7 +167,7 @@ export default function App() {
   return (
     <FinancialModelProvider>
       <HashRouter>
-        <Shell />
+        <MainApp />
       </HashRouter>
     </FinancialModelProvider>
   );
