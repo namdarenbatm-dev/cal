@@ -66,19 +66,21 @@ function Welcome({ onFinish }: { onFinish: () => void }) {
           src={ICON_PATH}
           alt="EDGE POS"
           style={{
-            width: 140,
-            height: 140,
+            width: 1080,
+            maxWidth: "80vw",
+            height: "auto",
+            maxHeight: "60vh",
             objectFit: "contain",
             display: "block",
-            margin: "0 auto 28px",
+            margin: "0 auto 36px",
           }}
         />
 
         <div
           style={{
-            fontSize: 40,
+            fontSize: 28,
             fontWeight: 700,
-            letterSpacing: "6px",
+            letterSpacing: "5px",
             color: "#111827",
             marginBottom: 14,
           }}
