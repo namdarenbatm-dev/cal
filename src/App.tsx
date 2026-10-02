@@ -1,4 +1,3 @@
-```tsx
 import React, { useEffect, useState } from "react";
 import { HashRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { AppLayout } from "./components/layout/AppLayout";
@@ -126,4 +125,3 @@ export default function App() {
     </FinancialModelProvider>
   );
 }
-```
