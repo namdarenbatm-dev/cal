@@ -16,13 +16,14 @@ import TargetProfit from "./pages/TargetProfit";
 import Scenarios from "./pages/Scenarios";
 import Reports from "./pages/Reports";
 import PrintReport from "./pages/PrintReport";
-import UserGuide from "./pages/UserGuide";
+import UserGuide, { UserGuideContent } from "./pages/UserGuide";
 
 const ICON_PATH =
   "/icon/9B6D5AD1-3C84-462E-A99A-D47720E99165.png";
 
 function Welcome({ onFinish }: { onFinish: () => void }) {
   const [visible, setVisible] = useState(false);
+  const [showGuide, setShowGuide] = useState(false);
 
   useEffect(() => {
     const showTimer = setTimeout(() => {
@@ -30,14 +31,47 @@ function Welcome({ onFinish }: { onFinish: () => void }) {
     }, 50);
 
     const finishTimer = setTimeout(() => {
-      onFinish();
+      if (!showGuide) {
+        onFinish();
+      }
     }, 5000);
 
     return () => {
       clearTimeout(showTimer);
       clearTimeout(finishTimer);
     };
-  }, [onFinish]);
+  }, [onFinish, showGuide]);
+
+  if (showGuide) {
+    return (
+      <div
+        dir="rtl"
+        className="fixed inset-0 z-[99999] overflow-y-auto bg-gray-50"
+      >
+        <div className="mx-auto max-w-6xl p-4 sm:p-8">
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <div className="text-lg font-bold text-gray-900">
+                راهنمای کاربر
+              </div>
+              <div className="text-sm text-gray-500">
+                EDGE POS — موتور تصمیم‌گیری فروش
+              </div>
+            </div>
+
+            <button
+              onClick={() => setShowGuide(false)}
+              className="rounded-xl border border-gray-200 bg-white px-5 py-3 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+            >
+              ← بازگشت
+            </button>
+          </div>
+
+          <UserGuideContent />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -73,7 +107,7 @@ function Welcome({ onFinish }: { onFinish: () => void }) {
             maxHeight: "60vh",
             objectFit: "contain",
             display: "block",
-            margin: "0 auto 36px",
+            margin: "0 auto 28px",
           }}
         />
 
@@ -83,7 +117,7 @@ function Welcome({ onFinish }: { onFinish: () => void }) {
             fontWeight: 700,
             letterSpacing: "5px",
             color: "#111827",
-            marginBottom: 14,
+            marginBottom: 10,
           }}
         >
           EDGE POS
@@ -95,9 +129,51 @@ function Welcome({ onFinish }: { onFinish: () => void }) {
             fontWeight: 400,
             color: "#6B7280",
             letterSpacing: "1px",
+            marginBottom: 26,
           }}
         >
           Designed by Mehdi Namdar
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: 12,
+            direction: "rtl",
+          }}
+        >
+          <button
+            onClick={() => setShowGuide(true)}
+            style={{
+              border: "1px solid #D1D5DB",
+              background: "#FFFFFF",
+              color: "#374151",
+              borderRadius: 12,
+              padding: "12px 22px",
+              fontSize: 14,
+              fontWeight: 600,
+              cursor: "pointer",
+            }}
+          >
+            📖 راهنمای کاربر
+          </button>
+
+          <button
+            onClick={onFinish}
+            style={{
+              border: "none",
+              background: "#0F766E",
+              color: "#FFFFFF",
+              borderRadius: 12,
+              padding: "12px 24px",
+              fontSize: 14,
+              fontWeight: 600,
+              cursor: "pointer",
+            }}
+          >
+            ورود به EDGE POS
+          </button>
         </div>
       </div>
     </div>
@@ -162,7 +238,6 @@ function DashboardApp() {
           path="/print-report"
           element={<PrintReport />}
         />
-
         <Route
           path="/user-guide"
           element={<UserGuide />}
